@@ -31,7 +31,8 @@
 *.out
 *.app
 
+# packages installed on computer
 packages/
-
+# visual studio files
 .vs/
 
