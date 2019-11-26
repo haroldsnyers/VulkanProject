@@ -31,4 +31,4 @@
 *.out
 *.app
 
-.packages/
+packages/
