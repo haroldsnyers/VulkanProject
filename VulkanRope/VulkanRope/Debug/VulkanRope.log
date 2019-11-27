@@ -1,0 +1,8 @@
+﻿  main.cpp
+c:\users\harold\documents\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkanrope\vulkanrope\main.cpp(1186): warning C4101: 'stagingBuffer': unreferenced local variable
+c:\users\harold\documents\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkanrope\vulkanrope\main.cpp(1187): warning C4101: 'stagingBufferMemory': unreferenced local variable
+c:\users\harold\documents\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkanrope\vulkanrope\main.cpp(1806): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\harold\documents\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkanrope\vulkanrope\main.cpp(1811): warning C4018: '<': signed/unsigned mismatch
+c:\users\harold\documents\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkanrope\vulkanrope\main.cpp(1823): warning C4018: '<': signed/unsigned mismatch
+c:\users\harold\documents\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkanrope\vulkanrope\main.cpp(1833): warning C4018: '<': signed/unsigned mismatch
+  VulkanRope.vcxproj -> C:\Users\Harold\Documents\GitHub\Ecam_MA1\programmation parallel\VulkanProjects\VulkanProject\VulkanRope\Debug\VulkanRope.exe
