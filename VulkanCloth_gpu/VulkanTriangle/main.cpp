@@ -2024,11 +2024,11 @@ private:
 		}
 
 		updateUniformBuffer(imageIndex);
-		//updateVertices(); // HERE
+		// updateVertices(); // HERE
 //		updateRope();
-		// updateCloth();
+		updateCloth();
 
-		submitComputeCommand();
+		// submitComputeCommand();
 
 		VkSubmitInfo submitInfo = {};
 		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
