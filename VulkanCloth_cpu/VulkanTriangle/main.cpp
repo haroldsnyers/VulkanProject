@@ -82,7 +82,7 @@ struct Vertex {
 	alignas(16) glm::vec3 color; // HERE
 	alignas(16) glm::vec3 normal;
 	alignas(16) glm::vec3 tangent;
-	alignas(16) glm::vec2 texCoord;
+	alignas(16) glm::vec2 texCoord; // texture coordinates
 	alignas(16) glm::vec3 speed;
 	float movable;
 
@@ -163,6 +163,7 @@ public:
 	}
 };
 
+// For light projection 
 struct UniformBufferObject {
 	alignas(16) glm::mat4 model;
 	alignas(16) glm::mat4 view;
@@ -173,8 +174,8 @@ struct UniformBufferObject {
 std::vector<Vertex> vertices;
 std::vector<uint16_t> indices;
 
+// Generation of the sphere in two steps 
 void generateSphere(float radius, int divisions) {
-
 
 	for (int i = 0; i <= 2 * divisions; i++) {
 		for (int j = 0; j <= divisions; j++) {
@@ -213,6 +214,7 @@ void generateSphere(float radius, int divisions) {
 
 std::vector<Vertex> clothVertices;
 std::vector<uint16_t> clothIndices;
+
 void generateCloth(float len, float divisions) {
 	for (float i = -len / 2; i < len / 2; i += (len / divisions)) {
 		for (float j = -len / 2; j < len / 2; j += (len / divisions)) {
@@ -250,24 +252,24 @@ void generateCloth(float len, float divisions) {
 	}
 }
 
-std::vector<Vertex> ropeVertices = {
-	{{0, 0, 0}, {0, 0, 0},
-  {0, 0, 0}, {0, 0, 0},
-  {0, 0},{0, 0, 0}, 0},
-
-	{{0, 0.2, 0}, {0, 0, 0},
-  {0, 0, 0}, {0, 0, 0},
-  {0, 0},{0, 0, 0}, 1},
-
-	{{0, 0.4, 0}, {0, 0, 0},
-  {0, 0, 0}, {0, 0, 0},
-  {0, 0},{0, 0, 0}, 1},
-
-	{{0, 0.6, 0}, {0, 0, 0},
-  {0, 0, 0}, {0, 0, 0},
-  {0, 0},{0, 0, 0}, 1}
-};
-std::vector<uint16_t> ropeIndices = { 0, 1, 1, 2, 2, 3 };
+//std::vector<Vertex> ropeVertices = {
+//	{{0, 0, 0}, {0, 0, 0},
+//  {0, 0, 0}, {0, 0, 0},
+//  {0, 0},{0, 0, 0}, 0},
+//
+//	{{0, 0.2, 0}, {0, 0, 0},
+//  {0, 0, 0}, {0, 0, 0},
+//  {0, 0},{0, 0, 0}, 1},
+//
+//	{{0, 0.4, 0}, {0, 0, 0},
+//  {0, 0, 0}, {0, 0, 0},
+//  {0, 0},{0, 0, 0}, 1},
+//
+//	{{0, 0.6, 0}, {0, 0, 0},
+//  {0, 0, 0}, {0, 0, 0},
+//  {0, 0},{0, 0, 0}, 1}
+//};
+//std::vector<uint16_t> ropeIndices = { 0, 1, 1, 2, 2, 3 };
 
 std::vector<Constraint> clothConstraints;
 
@@ -406,44 +408,7 @@ private:
 		vkUnmapMemory(device, clothVertexBufferMemory);
 	}
 
-	// Physics on CPU
-	//void updateRope() {
-	//	VkDeviceSize bufferSize = sizeof(ropeVertices[0]) * ropeVertices.size();
-	//	Vertex* ropeVertexData;
-	//	void* data;
-	//	vkMapMemory(device, ropeVertexBufferMemory, 0, bufferSize, 0, &data);
-
-	//	ropeVertexData = (Vertex*)data;
-
-	//	float deltaT = 0.0001;
-
-	//	glm::vec3* initPos = new glm::vec3[ropeVertices.size()];
-
-	//	// application de la gravit�
-	//	for (int i = 0; i < ropeVertices.size(); i++) {
-	//		glm::vec3 g = { 0, 0, -9.81 };
-	//		initPos[i] = ropeVertexData[i].pos;
-
-	//		ropeVertexData[i].speed += ((1 - deltaT) * g)*ropeVertexData[i].movable;
-	//		ropeVertexData[i].pos += (deltaT * ropeVertexData[i].speed);
-	//	}
-
-	//	// Applaying constraints
-	//	for (int i = 0; i < 10; i++) {
-	//		for (Constraint& c : clothConstraints) {
-	//			c.apply(ropeVertexData);
-	//		}
-	//	}
-
-	//	//update de la vitesse
-	//	for (int i = 0; i < ropeVertices.size(); i++) {
-
-	//		ropeVertexData[i].speed = (ropeVertexData[i].pos - initPos[i]) / deltaT;
-	//	}
-
-	//	vkUnmapMemory(device, ropeVertexBufferMemory);
-	//}
-
+	// update of position of cloth in CPU
 	void updateCloth() {
 		VkDeviceSize bufferSize = sizeof(clothVertices[0]) * clothVertices.size();
 		Vertex* clothVertexData;
@@ -460,7 +425,7 @@ private:
 
 		glm::vec3* initPos = new glm::vec3[clothVertices.size()];
 
-		// application de la gravit�
+		// application of the gravity to the cloth
 		for (int i = 0; i < clothVertices.size(); i++) {
 			glm::vec3 g = { 0, 0, -9.81 };
 			initPos[i] = clothVertexData[i].pos;
@@ -469,14 +434,15 @@ private:
 			clothVertexData[i].pos += (deltaT * clothVertexData[i].speed);
 		}
 
-		// Applaying constraints
+		// Applying constraints (method in vertex constraints (mathematical equation))
 		for (int i = 0; i < 10; i++) {
 			for (Constraint& c : clothConstraints) {
 				c.apply(clothVertexData);
 			}
 		}
-		//cloth on the top of the sphere 
+		// cloth on the top of the sphere 
 		// vanishing due to the increase of the contraint due to the movable
+		// applying physics on cloth 
 		for (int i = 0; i < clothVertices.size(); i++) {
 			float length = glm::length(clothVertexData[i].pos - center);
 			if (length <= 1.0f) {
@@ -514,6 +480,7 @@ private:
 		auto app = reinterpret_cast<Engine*>(glfwGetWindowUserPointer(window));
 		app->framebufferResized = true;
 	}
+
 	float division = 23;
 	void initVulkan() {
 		generateSphere(1.0f, 150);
@@ -793,6 +760,7 @@ private:
 		}
 	}
 
+	
 	void createLogicalDevice() {
 		QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
 
@@ -2024,11 +1992,11 @@ private:
 		}
 
 		updateUniformBuffer(imageIndex);
-		//updateVertices(); // HERE
+		// updateVertices(); // HERE
 //		updateRope();
-		// updateCloth();
+		updateCloth();
 
-		submitComputeCommand();
+		// submitComputeCommand();
 
 		VkSubmitInfo submitInfo = {};
 		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;
@@ -2290,13 +2258,13 @@ private:
 		return VK_FALSE;
 	}
 
-	void updateVertices() {
+	/*void updateVertices() {
 		VkDeviceSize bufferSize = sizeof(ropeVertices[0]) * ropeVertices.size();
 		void* data;
 		vkMapMemory(device, vertexBufferMemory, 0, bufferSize, 0, &data);
 
 		vkUnmapMemory(device, vertexBufferMemory);
-	}
+	}*/
 };
 
 int main() {

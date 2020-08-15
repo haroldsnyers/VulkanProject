@@ -404,6 +404,7 @@ private:
 			}
 		}
 		vkUnmapMemory(device, clothVertexBufferMemory);
+		printf("%d" ,clothConstraints.size());
 	}
 
 	// Physics on CPU
@@ -2024,11 +2025,11 @@ private:
 		}
 
 		updateUniformBuffer(imageIndex);
-		// updateVertices(); // HERE
+		//updateVertices(); // HERE
 //		updateRope();
-		updateCloth();
+		// updateCloth();
 
-		// submitComputeCommand();
+		submitComputeCommand();
 
 		VkSubmitInfo submitInfo = {};
 		submitInfo.sType = VK_STRUCTURE_TYPE_SUBMIT_INFO;

@@ -1,0 +1,49 @@
+﻿  main.cpp
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(238): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(240): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(385): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(387): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=uint16_t
+          ]
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(389): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(390): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=uint16_t
+          ]
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(391): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=uint16_t
+          ]
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(394): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(395): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=uint16_t
+          ]
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(396): warning C4244: 'argument': conversion from 'float' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=uint16_t
+          ]
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(401): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(407): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'unsigned __int64'
+  c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(407): note: consider using '%zd' in the format string
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(460): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(486): warning C4305: 'argument': truncation from 'double' to 'T'
+          with
+          [
+              T=float
+          ]
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(487): warning C4305: '=': truncation from 'double' to 'float'
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(491): warning C4305: '+=': truncation from 'double' to 'float'
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(493): warning C4804: '<': unsafe use of type 'bool' in operation
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(494): warning C4305: '+=': truncation from 'double' to 'float'
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(496): warning C4804: '<': unsafe use of type 'bool' in operation
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(451): warning C4101: 'vertexData': unreferenced local variable
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(453): warning C4101: 'sphereData': unreferenced local variable
+c:\github\ecam_ma1\programmation parallel\vulkanprojects\vulkanproject\vulkancloth_gpu_\vulkantriangle\main.cpp(1946): warning C4267: 'argument': conversion from 'size_t' to 'uint32_t', possible loss of data
+  VulkanTriangle.vcxproj -> C:\GitHub\Ecam_MA1\programmation parallel\VulkanProjects\VulkanProject\VulkanCloth_gpu_\x64\Debug\VulkanTriangle.exe

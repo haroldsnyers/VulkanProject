@@ -1,0 +1,70 @@
+#version 450
+
+layout (local_size_x = 32) in;
+
+struct Vertex {
+	vec3 pos;
+	vec3 color;
+	vec3 normal;
+	vec3 tangent;
+	vec2 texCoord;
+	vec3 speed;
+	float movable;
+};
+
+layout(std430, binding = 0) buffer vertexBlock {
+	Vertex clothVertexData[];
+};
+
+struct Constraint {
+	int A;
+	int B;
+	float length_;
+};
+
+layout(std430, binding = 1) buffer constraintBlock {
+	Constraint constraints[];
+};
+
+void main() {
+	uint index = gl_GlobalInvocationID.x;
+
+	vec3 g = { 0, 0, -9.81 };
+	vec3 center = { 0, 0, 0 };
+	float deltaT = 0.002;
+
+	clothVertexData[index].speed += ((deltaT) * g)*clothVertexData[index].movable;
+	clothVertexData[index].pos += (deltaT * clothVertexData[index].speed);
+
+	
+	for(int j=0; j<10; j++) {
+		for(int k=0; k < 2352 ;k++) {
+			Constraint c = constraints[k];
+			int A = c.A;
+			int B = c.B;
+			vec3 unit = (clothVertexData[A].pos-clothVertexData[B].pos) / c.length_;
+
+			clothVertexData[A].pos += (c.length_ - length(clothVertexData[A].pos-clothVertexData[B].pos)) * unit * 0.6f * (clothVertexData[A].movable/(clothVertexData[B].movable + clothVertexData[A].movable));
+			clothVertexData[B].pos -= (c.length_ - length(clothVertexData[A].pos-clothVertexData[B].pos)) * unit * 0.6f * (clothVertexData[B].movable/(clothVertexData[A].movable + clothVertexData[B].movable));
+		}
+	}
+
+	float length_ = length(clothVertexData[index].pos - center);
+	if (length_ <= 1.0f) {
+		vec3 unit = (clothVertexData[index].pos - center) / length_;
+		clothVertexData[index].pos = unit * 1.0f;
+		clothVertexData[index].speed = vec3(0.01);
+		clothVertexData[index].movable = 0.1;
+	}
+	else {
+		if (clothVertexData[index].movable < 0.5) {
+			clothVertexData[index].movable += 0.1;
+		}
+		if (0.5 <= clothVertexData[index].movable && clothVertexData[index].movable < 0.8) {
+			clothVertexData[index].movable += 0.01;
+		}
+		if (0.8 <= clothVertexData[index].movable && clothVertexData[index].movable < 1) {
+			clothVertexData[index].movable += 0;
+		}
+	}
+}
